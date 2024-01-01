@@ -88,7 +88,7 @@ form.addEventListener('submit', listener => {
         messageColor: '#FFFFFF',
         backgroundColor: '#EF4040',
         color: '#B51B1B',
-        iconUrl: './bi_x-octagon.svg',
+        iconUrl: '/bi_x-octagon.svg',
         iconColor: '#FAFAFB',
         position: 'topRight',
       });
