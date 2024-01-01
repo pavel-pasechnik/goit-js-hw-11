@@ -20,5 +20,5 @@ import{S as p,i as u}from"./assets/vendor-46aac873.js";(function(){const a=docum
            </div>
             </div>
           </li>
-            `,""),new p(".gallery a",{captionsData:"alt",captionDelay:"250"}).refresh()}).catch(t=>{c.innerHTML="",l.value="",console.log("Sorry, there are no images matching your search query. Please try again!"),u.show({title:"",message:"Sorry, there are no images matching your search query. Please try again!",messageColor:"#FFFFFF",backgroundColor:"#EF4040",color:"#B51B1B",iconUrl:"./bi_x-octagon.svg",iconColor:"#FAFAFB",position:"topRight"})})});
+            `,""),new p(".gallery a",{captionsData:"alt",captionDelay:"250"}).refresh()}).catch(t=>{c.innerHTML="",l.value="",console.log("Sorry, there are no images matching your search query. Please try again!"),u.show({title:"",message:"Sorry, there are no images matching your search query. Please try again!",messageColor:"#FFFFFF",backgroundColor:"#EF4040",color:"#B51B1B",iconUrl:"/bi_x-octagon.svg",iconColor:"#FAFAFB",position:"topRight"})})});
 //# sourceMappingURL=commonHelpers.js.map
