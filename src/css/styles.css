@@ -9,7 +9,8 @@
 @import url('./header.css'); */
 
 :root {
-  /* font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family:
+   Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -99,7 +100,7 @@
   padding: 0 156px;
 }
 
-.images-item {
+.images {
   width: 360px;
   height: 200px;
   overflow: hidden;
@@ -111,4 +112,37 @@ img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
+}
+
+.description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.description div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-bottom-color: #4e75ff;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -4,20 +4,21 @@
 import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
+// Описаний у документації
+import SimpleLightbox from 'simplelightbox';
+// Додатковий імпорт стилів
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const input = document.querySelector('.search-input');
 const form = document.querySelector('.search-form');
 const ul = document.querySelector('.images-list');
 
-// const getInputData = input.addEventListener('input', () => {
-//   input.value;
-// });
-
 const BASE_URL = new URL('https://pixabay.com/api/');
 const KEY = '41487030-c0d4f2e8fae3a5e9414bad560';
 
-const search = form.addEventListener('submit', listener => {
+form.addEventListener('submit', listener => {
   listener.preventDefault();
+  ul.innerHTML = '<span class="loader"></span>'; //loader
 
   const query = listener.currentTarget.elements.query.value;
 
@@ -44,11 +45,35 @@ const search = form.addEventListener('submit', listener => {
           html +
           `
           <li class="images-item">
-            <img alt="${img.tags}" src="${img.largeImageURL}" width="360" height="200">
+            <a class="images-link" href="${img.largeImageURL}"><img class="images" data-source="${img.largeImageURL}" alt="${img.tags}" src="${img.webformatURL}" width="360" height="200"></a>
+            <div class="description">
+            <div>
+            <p><b>Likes</b></p>
+            <p>${img.likes}</p>
+            </div>
+            <div>
+            <p><b>Views</b></p>
+            <p>${img.views}</p>
+            </div>
+            <div>
+            <p><b>Comments</b></p>
+            <p>${img.comments}</p>
+            </div>
+           <div>
+           <p><b>Downloads</b></p>
+           <p>${img.downloads}</p>
+           </div>
+            </div>
           </li>
             `,
         ''
       );
+      const lightbox = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionDelay: '250',
+      });
+
+      lightbox.refresh();
     })
     .catch(error => {
       ul.innerHTML = '';
@@ -63,7 +88,7 @@ const search = form.addEventListener('submit', listener => {
         messageColor: '#FFFFFF',
         backgroundColor: '#EF4040',
         color: '#B51B1B',
-        iconUrl: './bi_x-octagon.svg',
+        iconUrl: './img/bi_x-octagon.svg',
         iconColor: '#FAFAFB',
         position: 'topRight',
       });
