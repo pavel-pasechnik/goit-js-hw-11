@@ -127,6 +127,13 @@ img {
   align-items: center;
 }
 
+.gallery {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .loader {
   width: 48px;
   height: 48px;
@@ -145,4 +152,9 @@ img {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Приховання завантажувача*/
+.is-hidden {
+  display: none;
 }

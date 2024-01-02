@@ -12,13 +12,30 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const input = document.querySelector('.search-input');
 const form = document.querySelector('.search-form');
 const ul = document.querySelector('.images-list');
+const divGallery = document.querySelector('.gallery');
+
+// Створення нового елементу для завантажувача
+const loaderElement = document.createElement('span');
+loaderElement.className = 'loader is-hidden';
+
+// Додавання завантажувача до списку
+divGallery.append(loaderElement);
+
+const loaderClass = document.querySelector('.loader');
 
 const BASE_URL = new URL('https://pixabay.com/api/');
 const KEY = '41487030-c0d4f2e8fae3a5e9414bad560';
 
+// Ініціалізація SimpleLightbox один раз поза обробником подій
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: '250',
+});
+
 form.addEventListener('submit', listener => {
   listener.preventDefault();
-  ul.innerHTML = '<span class="loader"></span>'; //loader
+  // Переключення видимості завантажувача
+  loaderClass.classList.remove('is-hidden');
 
   const query = listener.currentTarget.elements.query.value;
 
@@ -33,12 +50,21 @@ form.addEventListener('submit', listener => {
       if (!response.ok) {
         throw new Error(response.status);
       }
+      // Очищення параметрів запиту
+      BASE_URL.searchParams.delete('key');
+      BASE_URL.searchParams.delete('q');
+      BASE_URL.searchParams.delete('image_type');
+      BASE_URL.searchParams.delete('orientation');
+      BASE_URL.searchParams.delete('safesearch');
+      //
       return response.json();
     })
     .then(images => {
       input.value = '';
+      // Приховання завантажувача після отримання результатів
+      loaderClass.classList.add('is-hidden');
       if (images.hits.length === 0) {
-        throw new Error(response.status);
+        throw new Error(error);
       }
       ul.innerHTML = images.hits.reduce(
         (html, img) =>
@@ -68,20 +94,14 @@ form.addEventListener('submit', listener => {
             `,
         ''
       );
-      const lightbox = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionDelay: '250',
-      });
-
+      // Виклик методу для оновлення галереї
       lightbox.refresh();
     })
     .catch(error => {
       ul.innerHTML = '';
       input.value = '';
-      console.log(
-        'Sorry, there are no images matching your search query. Please try again!'
-      );
-      iziToast.show({
+
+      error = iziToast.show({
         title: '',
         message:
           'Sorry, there are no images matching your search query. Please try again!',
